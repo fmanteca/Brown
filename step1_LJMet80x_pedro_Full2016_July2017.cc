@@ -245,7 +245,7 @@ void step1::Loop()
    TTree *outputTree = new TTree("ljmet","ljmet");
 
    int NJetsWtagged_0p6;
-   bool isPassTrilepton;    	    
+   bool isPassDilepton;    	    
    int isEE;
    int isEM;
    int isMM;
@@ -443,7 +443,7 @@ void step1::Loop()
    outputTree->Branch("EGammaGsfSF",&EGammaGsfSF,"EGammaGsfSF/F");
    outputTree->Branch("MuTrkSF",&MuTrkSF,"MuTrkSF/F");
 
-   outputTree->Branch("isPassTrilepton",&isPassTrilepton,"isPassTrilepton/O");
+   outputTree->Branch("isPassDilepton",&isPassDilepton,"isPassDilepton/O");
    outputTree->Branch("isEE",&isEE,"isEE/I");
    outputTree->Branch("isEM",&isEM,"isEM/I");
    outputTree->Branch("isMM",&isMM,"isMM/I");

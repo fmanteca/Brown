@@ -382,8 +382,8 @@ inline double Det_em(double fe, double pe, double fm, double pm, double q){ retu
 
 double GetWeight(int mode, std::vector<double> lep1_info, std::vector<double> lep2_info){
 
-  double promptProbability[2];
-  double fakeProbability[2];
+  double promptProbability[2] = {1.0, 1.0};
+  double fakeProbability[2] = {1.0, 1.0};
 
   int nTight = 0; 
  
@@ -396,42 +396,35 @@ double GetWeight(int mode, std::vector<double> lep1_info, std::vector<double> le
       {
 	nTight++;
 
-	promptProbability[0] = p1 * (1 - f1);
-	fakeProbability[0]   = f1 * (1 - p1);
+	promptProbability[0] = p1 * (1 - f1) / (p1 - f1);
+	fakeProbability[0]   = f1 * (1 - p1) / (p1 - f1);
 
 	//cout << lep.flavour << "  "  << lep.pt << "  " << lep.eta << "  " << p << "  " << f << "  " << promptProbability[i] << "  " << fakeProbability[i]  << endl;
 
       }
   else if (lep1_info.at(1) == 0 ) 
       {
-	promptProbability[0] = p1 * f1;
-	fakeProbability[0]   = p1 * f1;
+	promptProbability[0] = p1 * f1 / (p1 - f1);
+	fakeProbability[0]   = p1 * f1 / (p1 - f1);
       }
-
-    promptProbability[0] /= (p1 - f1);
-    fakeProbability[0]   /= (p1 - f1);
-
 
 
   if (lep2_info.at(1) == 1)
       {
 	nTight++;
 
-	promptProbability[1] = p2 * (1 - f2);
-	fakeProbability[1]   = f2 * (1 - p2);
+	promptProbability[1] = p2 * (1 - f2) / (p2 - f2);
+	fakeProbability[1]   = f2 * (1 - p2) / (p2 - f2);
 
 	//cout << lep.flavour << "  "  << lep.pt << "  " << lep.eta << "  " << p << "  " << f << "  " << promptProbability[i] << "  " << fakeProbability[i]  << endl;
 
       }
   else if (lep2_info.at(1) == 0 ) 
       {
-	promptProbability[1] = p2 * f2;
-	fakeProbability[1]   = p2 * f2;
+	promptProbability[1] = p2 * f2 / (p2 - f2);
+	fakeProbability[1]   = p2 * f2 / (p2 - f2);
       }
 
-    promptProbability[1] /= (p2 - f2);
-    fakeProbability[1]   /= (p2 - f2);
-  
 
   double PF = promptProbability[0] * fakeProbability[1];
   double FP = promptProbability[1] * fakeProbability[0];
