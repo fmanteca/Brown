@@ -1,0 +1,14 @@
+
+universe = vanilla
+Executable = /bin/sleep
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+### Transfer_Input_Files = file1, file2
+Output = sleep_$(Cluster)_$(Process).stdout
+Error = sleep_$(Cluster)_$(Process).stderr
+Log = sleep_$(Cluster)_$(Process).log
+notify_user = fernanpe@FNAL.GOV
+x509userproxy = /tmp/x509up_u53248
+Arguments = 60
+Queue 5
+
